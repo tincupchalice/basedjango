@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<!--Register-->
+<div class="row">
+    <div class="col"><h1>Register</h1></div>
+</div>
+<form method="POST">
+    {% csrf_token %}
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-3">
+            <label for="username">Username:&nbsp;</label>
+        </div>
+        <div class="col-md-9">
+            {{ register_form.username }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            &nbsp;
+        </div>
+        <div class="col-md-9 helptext">
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-3">
+            <label for="email">Email:&nbsp;</label>
+        </div>
+        <div class="col-md-9">
+            {{ register_form.email }}
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-3">
+            <label for="password1">Password:&nbsp;</label>
+        </div>
+        <div class="col-md-9">
+            {{ register_form.password1 }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label for="password2">Password Confirm:&nbsp;</label>
+        </div>
+        <div class="col-md-9">
+            {{ register_form.password2 }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            &nbsp;
+        </div>
+        <div class="col-md-9 helptext">
+            <ul>
+                <li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-3">
+            <label for="devices">Device:&nbsp;</label>
+        </div>
+        <div class="col-md-9">
+            {{ register_form.devices }}
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+        <div class="col-md-10">
+            <p class="text-center">If you already have an account, <a class="btn btn-success" href="{% url 'login' %}">login</a> instead.</p>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
