@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% endif %}
+  {% endif %}
+  <h3>Login</h3>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td id="username_cell">{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td id="password_cell">{{ form.password }}</td>
+      </tr>
+    </table>
+      <input class="btn btn-success" type="submit" value="Login">
+      <input type="hidden" name="next" value="{{ next }}">
+  </form>
+  <p style="padding-top: 25px;"><a class="btn btn-info" href="/users/register/?redirect_url='/users/login/'">Register here</a></p>
+  {# Assumes you set up the password_reset view in your URLconf #}
+  <p><a class="btn btn-danger" href="{% url 'password_reset' %}">Lost password</a></p>
+<script>
+var userinputCell = document.getElementById("username_cell");
+var userInputCellChildren = userinputCell.children;
+for (let child of userInputCellChildren)
+    if (child.tagName == "input")
+        child.classList.add("form-control");
+var passwordinputCell = document.getElementById("password_cell");
+var passwordInputCellChildren = passwordinputCell.children;
+for (let child of passwordInputCellChildren)
+    if (child.tagName == "input")
+        child.classList.add("form-control");
+</script>
+{% endblock %}
